@@ -1,5 +1,5 @@
---- pvm3/xpvm/src/xpvm.tcl.orig	Thu Apr  9 23:12:32 1998
-+++ pvm3/xpvm/src/xpvm.tcl	Wed Dec 20 22:45:05 2000
+--- xpvm/src/xpvm.tcl.orig	Thu Apr  9 23:12:32 1998
++++ xpvm/src/xpvm.tcl	Wed Dec 20 22:45:05 2000
 @@ -54,7 +54,7 @@
  	set xpvm_directory "$home/$def"
  }
