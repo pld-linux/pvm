@@ -8,7 +8,7 @@ Release:	4
 License:	Free
 Group:		Applications/Networking
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
-# Source0-md5: 806abe9a866eab5981383c17ff9ed175
+# Source0-md5:	806abe9a866eab5981383c17ff9ed175
 Source1:	%{name}d.init
 Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
 # Source2-md5:	4a2f619000d672f572f9678a46e4e2d1
