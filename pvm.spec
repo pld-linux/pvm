@@ -1,11 +1,15 @@
 Summary:	Parallel Virtual Machine
 Name:		pvm
 Version:	3.4.0
-Release:	1
+Release:	2
 Copyright:	free
 Group:		Development/Libraries
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
+Source1:	pvmd.init
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define _pvm_root 	%{_datadir}/pvm3/
+%define _pvm_arch	LINUX
 
 %description
 PVM is a software system that enables a collection of heterogeneous
@@ -20,7 +24,7 @@ User programs written in C, C++ or Fortran access PVM through library
 routines.
 
 %prep 
-%setup -n pvm3
+%setup -q -n pvm3
 
 %build
 PVM_ROOT=`pwd` make
@@ -28,80 +32,82 @@ PVM_ROOT=`pwd` make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/usr/{bin,include,lib,man/man{1,3}}
+install -d $RPM_BUILD_ROOT/usr/{bin,include,lib}
+install -d $RPM_BUILD_ROOT%{_pvm_root}/lib/%{_pvm_arch}
+install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{examples,gexamples,hoster,misc,tasker,xep}
+install -d $RPM_BUILD_ROOT%{_mandir}/{man1,man3}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/
+install -d $RPM_BUILD_ROOT%{_sbindir}
 
-install -s lib/LINUX/{pvm,pvmd3,pvmgs,pvm_gstat,pvmgroups,pvmgs,mtracer,trcsort} \
-	$RPM_BUILD_ROOT/usr/pvm3/lib/LINUX
+install %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pvmd
 
-for f in aimk cshrc.stub debugger debugger2 ipcfree pvm pvmd\
-		pvmgetarch pvmtmparch xpvm; do
-	install -m755 lib/ $RPM_BUILD_ROOT%{_bindir}
-done
+install lib/%{_pvm_arch}/{pvm,pvmgs} \
+	$RPM_BUILD_ROOT%{_bindir}
+install lib/%{_pvm_arch}/pvmd3 $RPM_BUILD_ROOT%{_sbindir}/
+
+
+
+install lib/debugger	$RPM_BUILD_ROOT%{_bindir}
+install lib/debugger2	$RPM_BUILD_ROOT%{_bindir}
+install lib/pvmgetarch	$RPM_BUILD_ROOT%{_bindir}
+install lib/pvmtmparch	$RPM_BUILD_ROOT%{_bindir}
+install lib/xpvm	$RPM_BUILD_ROOT%{_bindir}
 
 install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT%{_includedir}
-install lib/LINUX/lib*.a $RPM_BUILD_ROOT%{_libdir}
+install lib/%{_pvm_arch}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 
 install man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1
 install man/man3/* $RPM_BUILD_ROOT%{_mandir}/man3
 
 # Examples
-cp -arv examples $RPM_BUILD_ROOT/usr/pvm3
-cp -arv gexamples $RPM_BUILD_ROOT/usr/pvm3
-cp -arv hoster $RPM_BUILD_ROOT/usr/pvm3
-cp -arv misc $RPM_BUILD_ROOT/usr/pvm3
-cp -arv tasker $RPM_BUILD_ROOT/usr/pvm3
-cp -arv xep $RPM_BUILD_ROOT/usr/pvm3
+cp -rf examples/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/examples/
+cp -rf gexamples/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/gexamples
+cp -rf hoster/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/hoster
+cp -rf misc/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/misc
+cp -rf tasker/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/tasker
+cp -rf xep/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/xep
 
-ln -sf ../pvm3/lib/aimk $RPM_BUILD_ROOT%{_bindir}/aimk
-ln -sf ../pvm3/lib/pvm  $RPM_BUILD_ROOT%{_bindir}/pvm
-ln -sf ../../../pvm3/lib/pvmd $RPM_BUILD_ROOT%{_bindir}/pvmd
+#ln -sf  $RPM_BUILD_ROOT%{_bindir}/aimk %{_pvm_root}/lib/aimk
+#ln -sf  $RPM_BUILD_ROOT%{_bindir}/pvm  %{_pvm_root}/lib/pvm
+#ln -sf  $RPM_BUILD_ROOT%{_bindir}/pvmd %{_pvm_root}/lib/pvmd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-echo 'Please set the PVM_ROOT variable to point to /usr/pvm3'
-echo -n
+ln -sf %{_bindir}/pvmd3 %{_pvm_root}/lib/LINUX/pvmd3 
+ln -sf %{_bindir}/pvm %{_pvm_root}/lib/LINUX/pvm 
+ln -sf %{_bindir}/pvmgs %{_pvm_root}/lib/LINUX/pvmgs
 
-%preun
+%{_sysconfdir}/rc.d/init.d/pvmd restart
+%postun
+
+%{_sysconfdir}/rc.d/init.d/pvmd stop
 
 %files
-%attr(-,root,root) %{_bindir}/aimk
-%attr(-,root,root) %{_bindir}/pvm
-%attr(-,root,root) %{_bindir}/pvmd
-%attr(-,root,root) /usr/pvm3/bin/LINUX/pvm_gstat
-%attr(-,root,root) /usr/pvm3/bin/LINUX/pvmgroups
-%attr(-,root,root) /usr/pvm3/bin/LINUX/pvmgs
-%attr(-,root,root) /usr/pvm3/bin/LINUX/tracer
-%attr(-,root,root) /usr/pvm3/bin/LINUX/trcsort
-%attr(-,root,root) /usr/pvm3/lib/aimk
-%attr(-,root,root) /usr/pvm3/lib/cshrc.stub
-%attr(-,root,root) /usr/pvm3/lib/debugger
-%attr(-,root,root) /usr/pvm3/lib/debugger2
-%attr(-,root,root) /usr/pvm3/lib/ipcfree
-%attr(-,root,root) /usr/pvm3/lib/pvm
-%attr(-,root,root) /usr/pvm3/lib/pvmd
-%attr(-,root,root) /usr/pvm3/lib/pvmgetarch
-%attr(-,root,root) /usr/pvm3/lib/pvmtmparch
-%attr(-,root,root) /usr/pvm3/lib/xpvm
-%attr(-,root,root) /usr/pvm3/lib/LINUX/pvm
-%attr(-,root,root) /usr/pvm3/lib/LINUX/pvmd3
-%attr(-,root,root) /usr/pvm3/lib/LINUX/pvmgs
-%attr(-,root,root) %{_includedir}/fpvm3.h
-%attr(-,root,root) %{_includedir}/pvm3.h
-%attr(-,root,root) %{_includedir}/pvmproto.h
-%attr(-,root,root) %{_includedir}/pvmtev.h
-%attr(-,root,root) %{_libdir}/libfpvm3.a
-%attr(-,root,root) %{_libdir}/libgpvm3.a
-%attr(-,root,root) %{_libdir}/libpvm3.a
-%attr(-,root,root) %{_libdir}/libpvmtrc.a
-%attr(-,root,root) %{_mandir}/man1/*
-%attr(-,root,root) %{_mandir}/man3/*
-%attr(-,root,root) /usr/pvm3/examples/* 
-%attr(-,root,root) /usr/pvm3/gexamples/* 
-%attr(-,root,root) /usr/pvm3/hoster/* 
-%attr(-,root,root) /usr/pvm3/misc/* 
-%attr(-,root,root) /usr/pvm3/tasker/* 
-%attr(-,root,root) /usr/pvm3/xep/* 
-%attr(-,root,root) %doc Readme 
-%attr(-,root,root) %doc doc/* 
+%{_sysconfdir}/rc.d/init.d/pvmd
+%{_bindir}/debugger
+%{_bindir}/debugger2
+%{_bindir}/pvmgetarch
+%{_bindir}/pvmtmparch
+%{_bindir}/xpvm
+%{_bindir}/pvm
+%{_sbindir}/pvmd3
+%{_bindir}/pvmgs
+%{_includedir}/fpvm3.h
+%{_includedir}/pvm3.h
+%{_includedir}/pvmproto.h
+%{_includedir}/pvmtev.h
+%{_libdir}/libfpvm3.a
+%{_libdir}/libgpvm3.a
+%{_libdir}/libpvm3.a
+%{_libdir}/libpvmtrc.a
+%{_pvm_root}/lib/%{_pvm_arch}
+%{_mandir}/man1/*
+%{_mandir}/man3/*
+%doc %{_docdir}/%{name}-%{version}/examples/* 
+%doc %{_docdir}/%{name}-%{version}/gexamples/* 
+%doc %{_docdir}/%{name}-%{version}/hoster/* 
+%doc %{_docdir}/%{name}-%{version}/misc/* 
+%doc %{_docdir}/%{name}-%{version}/tasker/* 
+%doc %{_docdir}/%{name}-%{version}/xep/* 
