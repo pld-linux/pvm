@@ -31,7 +31,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_pvm_arch	LINUX
 %else
 %ifarch alpha
-%define		_pvm_arch	LINUXAPLHA
+%define		_pvm_arch	LINUXALPHA
 %else
 %ifarch sparc sparc64
 %define		_pvm_arch	LINUXSPARC
