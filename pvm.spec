@@ -1,10 +1,10 @@
 Summary:	Parallel Virtual Machine
 Name:		pvm
-Version:	3.40
+Version:	3.4.0
 Release:	1
-Copyright:	
+Copyright:	free
 Group:		Development/Libraries
-Source0:	ftp://ftp.netlib.org/pvm3/%{name}.%{version}.tar.gz
+Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
