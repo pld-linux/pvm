@@ -4,7 +4,7 @@ Summary(pl):	Rozproszona Maszyna Wirtualna
 Summary(pt_BR):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.4
-Release:	3
+Release:	4
 License:	Free
 Group:		Applications/Networking
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
@@ -14,6 +14,7 @@ Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
 # Source2-md5:	4a2f619000d672f572f9678a46e4e2d1
 Patch0:		%{name}-aimk.patch
 Patch1:		%{name}-noenv.patch
+Patch2:		%{name}-amd64.patch
 URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel
@@ -36,8 +37,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %ifarch hppa
 %define		_pvm_arch	LINUXHPPA
 %else
+%ifarch amd64
+%define		_pvm_arch	LINUX64
+%else
 %error "Unsupported architecture"
 exit 1
+%endif
 %endif
 %endif
 %endif
@@ -123,6 +128,7 @@ Demon PVM.
 %setup -q -n %{name}3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 cp %{SOURCE2} .
 
