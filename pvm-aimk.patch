@@ -1,0 +1,46 @@
+--- pvm3/lib/aimk-env	Thu Oct  1 23:33:32 1998
++++ pvm3/lib/aimk	Tue Dec 26 01:58:27 2000
+@@ -6,7 +6,8 @@
+ #
+ #	Make wrapper for multiple arch. builds.
+ #
+-#	Automatically sets PVM_ARCH for $MAKE to use.
++#	Sets PVM_ARCH to @PVM_ARCH@
++#	and PVM_ROOT to @PVM_ROOT@ for $MAKE to use.
+ #
+ #	Action depends on makefile locations:
+ #	1.  If $PVM_ARCH/Makefile or $PVM_ARCH/makefile exists,
+@@ -24,7 +25,7 @@
+ #	    aimk [-here] [ make args ... ]
+ #
+ #	09 Apr 1993  Manchek
+-#
++#	26 Dec 2000  modified - to make $PVM_ROOT not needed
+ 
+ makeincwd=0
+ found=1
+@@ -35,22 +36,8 @@
+ 	esac
+ done
+ 
+-case "x$PVM_ROOT" in x )
+-#	if [ -d $HOME/pvm3 ]; then
+-#		PVM_ROOT=$HOME/pvm3
+-#	else
+-		echo aimk: PVM_ROOT not defined >&2
+-		exit 1
+-#	fi
+-;; esac
+-
+-case "x$PVM_ARCH" in x | xUNKNOWN )
+-	PVM_ARCH="`$PVM_ROOT/lib/pvmgetarch`"
+-	case "x$PVM_ARCH" in x )
+-		echo 'aimk: no pvmgetarch - is $PVM_ROOT set correctly?' >&2
+-		exit 1
+-	;; esac
+-;; esac
++if [ -z "$PVM_ARCH" ] ; then PVM_ARCH="@PVM_ARCH@" ; fi
++if [ -z "$PVM_ROOT" ] ; then PVM_ROOT="@PVM_ROOT@" ; fi
+ 
+ export PVM_ARCH
+ export PVM_ROOT
