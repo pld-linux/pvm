@@ -16,7 +16,7 @@
 
 # Check that networking is up.
 if is_no "${NETWORKING}"; then
-        msg_Network_Down pvmd
+        msg_network_down pvmd
         exit 1
 fi
 
@@ -30,7 +30,7 @@ case "$1" in
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pvmd
 	else
-		msg_Already_Running "Parallel Virtual Machine"
+		msg_already_running "Parallel Virtual Machine"
 	fi
 	;;
   stop)
@@ -39,7 +39,7 @@ case "$1" in
 		killproc pvmd3
 		rm -f /var/run/pvmd.pid /var/lock/subsys/pvmd >/dev/null 2>&1
 	else
-		msg_Not_Running "Parallel Virtual Machine"
+		msg_not_running "Parallel Virtual Machine"
 		exit 1
 	fi	
 	;;
@@ -52,7 +52,7 @@ case "$1" in
 	exit $?
 	;;
   *)
-	msg_Usage "$0 {start|stop|status|restart|reload|force-reload}"
+	msg_usage "$0 {start|stop|status|restart|reload|force-reload}"
 	exit 1
 esac
 
