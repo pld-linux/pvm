@@ -35,7 +35,7 @@ install -s lib/LINUX/{pvm,pvmd3,pvmgs,pvm_gstat,pvmgroups,pvmgs,mtracer,trcsort}
 
 for f in aimk cshrc.stub debugger debugger2 ipcfree pvm pvmd\
 		pvmgetarch pvmtmparch xpvm; do
-	install -m755 lib/ $RPM_BUILD_ROOT/usr/bin
+	install -m755 lib/ $RPM_BUILD_ROOT%{_bindir}
 done
 
 install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT/usr/include
@@ -52,9 +52,9 @@ cp -arv misc $RPM_BUILD_ROOT/usr/pvm3
 cp -arv tasker $RPM_BUILD_ROOT/usr/pvm3
 cp -arv xep $RPM_BUILD_ROOT/usr/pvm3
 
-ln -sf ../pvm3/lib/aimk $RPM_BUILD_ROOT/usr/bin/aimk
-ln -sf ../pvm3/lib/pvm  $RPM_BUILD_ROOT/usr/bin/pvm
-ln -sf ../../../pvm3/lib/pvmd $RPM_BUILD_ROOT/usr/bin/pvmd
+ln -sf ../pvm3/lib/aimk $RPM_BUILD_ROOT%{_bindir}/aimk
+ln -sf ../pvm3/lib/pvm  $RPM_BUILD_ROOT%{_bindir}/pvm
+ln -sf ../../../pvm3/lib/pvmd $RPM_BUILD_ROOT%{_bindir}/pvmd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -66,9 +66,9 @@ echo -n
 %preun
 
 %files
-%attr(-,root,root) /usr/bin/aimk
-%attr(-,root,root) /usr/bin/pvm
-%attr(-,root,root) /usr/bin/pvmd
+%attr(-,root,root) %{_bindir}/aimk
+%attr(-,root,root) %{_bindir}/pvm
+%attr(-,root,root) %{_bindir}/pvmd
 %attr(-,root,root) /usr/pvm3/bin/LINUX/pvm_gstat
 %attr(-,root,root) /usr/pvm3/bin/LINUX/pvmgroups
 %attr(-,root,root) /usr/pvm3/bin/LINUX/pvmgs
