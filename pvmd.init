@@ -4,7 +4,7 @@
 #
 # chkconfig:	345 65 45
 #
-# description:	PVM is a daemon which permits you to use libpvm3. This is
+# description:	PVM is a daemon which permits you to use libpvm3. This is \
 #		a library which supports parallel computing.
 
 
