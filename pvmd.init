@@ -4,7 +4,7 @@
 #
 # chkconfig:	345 65 45
 #
-# description:  PVM is a daemon which permits you to use libpvm3. This is
+# description:	PVM is a daemon which permits you to use libpvm3. This is
 #		a library which supports paralele computing.
 
 
@@ -15,9 +15,13 @@
 . /etc/sysconfig/network
 
 # Check that networking is up.
-if is_no "${NETWORKING}"; then
-        msg_network_down pvmd
-        exit 1
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down "Parallel Virtual Machine"
+		exit 1
+	fi
+else
+	exit 0
 fi
 
 # See how we were called.
@@ -31,10 +35,11 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pvmd
 	else
 		msg_already_running "Parallel Virtual Machine"
+		exit 1
 	fi
 	;;
   stop)
-        if [ -f /var/lock/subsys/pvmd ]; then
+	if [ -f /var/lock/subsys/pvmd ]; then
 		msg_stopping "Parallel Virtual Machine"
 		killproc pvmd3
 		rm -f /var/run/pvmd.pid /var/lock/subsys/pvmd >/dev/null 2>&1
@@ -52,7 +57,7 @@ case "$1" in
 	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|status|restart|reload|force-reload}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
 	exit 1
 esac
 
