@@ -41,8 +41,8 @@ done
 install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT/usr/include
 install lib/LINUX/lib*.a $RPM_BUILD_ROOT/usr/lib
 
-install man/man1/* $RPM_BUILD_ROOT/usr/man/man1
-install man/man3/* $RPM_BUILD_ROOT/usr/man/man3
+install man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1
+install man/man3/* $RPM_BUILD_ROOT%{_mandir}/man3
 
 # Examples
 cp -arv examples $RPM_BUILD_ROOT/usr/pvm3
@@ -95,8 +95,8 @@ echo -n
 %attr(-,root,root) /usr/lib/libgpvm3.a
 %attr(-,root,root) /usr/lib/libpvm3.a
 %attr(-,root,root) /usr/lib/libpvmtrc.a
-%attr(-,root,root) /usr/man/man1/*
-%attr(-,root,root) /usr/man/man3/*
+%attr(-,root,root) %{_mandir}/man1/*
+%attr(-,root,root) %{_mandir}/man3/*
 %attr(-,root,root) /usr/pvm3/examples/* 
 %attr(-,root,root) /usr/pvm3/gexamples/* 
 %attr(-,root,root) /usr/pvm3/hoster/* 
