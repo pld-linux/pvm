@@ -1,68 +1,17 @@
-diff -Nur pvm3.pre/src/global.h pvm3/src/global.h
---- pvm3.pre/src/global.h	Thu Jul  8 21:00:20 1999
-+++ pvm3/src/global.h	Wed Jan  3 19:30:38 2001
-@@ -255,12 +255,8 @@
- #define	DEFDEBUGGER	"$PVM_ROOT/lib/debugger"
+--- pvm3/src/pvmcruft.c.wiget	Thu Sep 27 23:25:10 2001
++++ pvm3/src/pvmcruft.c	Mon Nov 12 16:48:05 2001
+@@ -874,9 +874,7 @@
  #endif
  
--#ifndef	PVMDFILE
- #ifdef IMA_OS2
- #define PVMDFILE	"lib/pvmd.cmd"
--#else
--#define	PVMDFILE	"lib/pvmd"
--#endif
- #endif
- 
- #ifndef	PVMDPATH
-diff -Nur pvm3.pre/src/pvmcruft.c pvm3/src/pvmcruft.c
---- pvm3.pre/src/pvmcruft.c	Wed Mar 29 22:04:12 2000
-+++ pvm3/src/pvmcruft.c	Wed Jan  3 19:40:57 2001
-@@ -778,43 +778,7 @@
- char *
- pvmgetroot()
- {
--	static char *rd = 0;
--
--	if (!rd) {
--
--#ifdef IMA_CSPP
--
--		struct stat buf;
--
--		rd = STRALLOC("/usr/convex/pvm");
--		if (stat(rd, &buf) == -1) {
--			pvmlogperror(
--				"Unable to default PVM_ROOT to /usr/convex/pvm");
--			pvmbailout(0);
--			exit(1);		/* the other meaning of bail out */
--		}
--		pvmputenv("PVM_ROOT=/usr/convex/pvm");
--		pvmlogerror("Defaulting PVM_ROOT to /usr/convex/pvm");
--
--#else
--
--		rd = getenv("PVM_ROOT");
--
--#ifdef WIN32
--		if (!rd)
--			rd = read_pvmregistry("PVM_ROOT");
--#endif
--
--#endif
--
--		if (!rd) {
+ 		if (!rd) {
 -			pvmlogerror("PVM_ROOT environment variable not set.\n");
 -			pvmbailout(0);
 -			exit(1);		/* the other meaning of bail out */
--		}
--	}
--
--	return rd;
-+	return PVMROOT;
- }
++			return PVMROOT;
+ 		}
+ 	}
  
- 
-@@ -881,19 +845,7 @@
+@@ -949,19 +947,7 @@
  char *
  pvmgetpvmd()
  {

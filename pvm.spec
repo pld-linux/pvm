@@ -1,8 +1,8 @@
 Summary:	Parallel Virtual Machine
 Summary(pl):	Rozproszona Maszyna Wirtualna
 Name:		pvm
-Version:	3.4.3
-Release:	24
+Version:	3.4.4
+Release:	1
 License:	Free
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -13,7 +13,6 @@ Source1:	%{name}d.init
 Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
 Patch0:		%{name}-aimk.patch
 Patch1:		%{name}-noenv.patch
-Patch2:		%{name}-vaargfix.patch
 URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel
@@ -98,7 +97,6 @@ ksi±¿kê po angielsku.
 %setup -q -n pvm3
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 cp -f lib/aimk lib/aimk.tmp
