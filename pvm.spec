@@ -48,7 +48,7 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Requires:	pvm = %{version}
+Requires:	%{name} = %{version}
 
 %description devel
 This package contains PVM header files and static libraries.
@@ -63,7 +63,7 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Requires:	pvm-devel = %{version}
+Requires:	%{name}-devel = %{version}
 
 %description examples
 This package contains PVM examples written in C and Fortran, and book
