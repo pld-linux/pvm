@@ -1,7 +1,7 @@
 Summary:	Parallel Virtual Machine
 Name:		pvm
 Version:	3.4.3
-Release:	4
+Release:	22
 License:	Free
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -11,10 +11,12 @@ Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
 Source1:	%{name}d.init
 Patch0:		%{name}-aimk.patch
 Patch1:		%{name}-noenv.patch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Patch2:		%{name}-vaargfix.patch
+URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel
-#Prereq:	/sbin/chkconfig
+Prereq:		/sbin/chkconfig
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pvm_root 	%{_datadir}/pvm3
 %define		_pvm_arch	LINUX
@@ -58,6 +60,7 @@ This package contains PVM examples written in C.
 %setup -q -n pvm3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cp -f lib/aimk lib/aimk.tmp
@@ -98,28 +101,28 @@ done
 cd -
 
 # Examples
-cp -rf {examples,gexamples,hoster,misc,tasker,xep} $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+cp -rf examples gexamples hoster misc tasker xep $RPM_BUILD_ROOT%{_examplesdir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 # what about these? normal user can't use pvmd ran by another user (or root)...
 
-#%post
-#/sbin/chkconfig --add pvmd
-#if [ -f /var/lock/subsys/pvmd ]; then
-#	/etc/rc.d/init.d/pvmd restart >&2
-#else
-#	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
-#fi
+%post
+/sbin/chkconfig --add pvmd
+if [ -f /var/lock/subsys/pvmd ]; then
+	/etc/rc.d/init.d/pvmd restart >&2
+else
+	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
+fi
 
 #%preun
-#if [ "$1" = "0" ]; then
-#	if [ -f /var/lock/subsys/pvmd ]; then
-#		/etc/rc.d/init.d/pvmd stop >&2
-#	fi
-#	/sbin/chkconfig --del pvmd
-#fi
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/pvmd ]; then
+		/etc/rc.d/init.d/pvmd stop >&2
+	fi
+	/sbin/chkconfig --del pvmd
+fi
 
 %files
 %defattr(644,root,root,755)
