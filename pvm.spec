@@ -221,6 +221,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n pvmd
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/pvmd3
-%attr(755,root,root) /etc/rc.d/init.d/pvmd
+%attr(754,root,root) /etc/rc.d/init.d/pvmd
 %{_mandir}/man1/pvmd*
 %{_mandir}/man1/pvm_shmd*
