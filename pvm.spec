@@ -5,7 +5,7 @@ Release:	1
 Copyright:	
 Group:		Development/Libraries
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}.%{version}.tar.gz
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 PVM is a software system that enables a collection of heterogeneous
