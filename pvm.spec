@@ -6,7 +6,7 @@ Name:		pvm
 Version:	3.4.4
 Release:	3
 License:	Free
-Group:		Development/Libraries
+Group:		Applications/Networking
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
 # Source0-md5: 806abe9a866eab5981383c17ff9ed175
 Source1:	%{name}d.init
@@ -18,7 +18,6 @@ URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel
 BuildRequires:	m4
-Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pvm_root 	%{_libdir}/pvm3
@@ -110,18 +109,22 @@ tak¿e ksi±¿kê po angielsku.
 
 %package -n pvmd
 Summary:	PVM Daemon
-Summary(pl):	Serwer PVM
-Group:		Development/Libraries
-#Requires:	%{name}-devel = %{version}
+Summary(pl):	Demon PVM
+Group:		Applications/Networking
+#Requires(post,preun):	/sbin/chkconfig
 
 %description -n pvmd
+PVM Daemon.
 
 %description -n pvmd -l pl
+Demon PVM.
 
 %prep
-%setup -q -n pvm3
+%setup -q -n %{name}3
 %patch0 -p1
 %patch1 -p1
+
+cp %{SOURCE2} .
 
 %build
 cp -f lib/aimk lib/aimk.tmp
@@ -136,7 +139,7 @@ PVM_ROOT=`pwd` make CFLOPTS="$PCFLOPTS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_pvm_root}/conf,%{_docdir}/%{name}} \
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_pvm_root}/conf} \
 	$RPM_BUILD_ROOT%{_examplesdir}/%{name}/{examples,gexamples,hoster,misc,tasker,xep} \
 	$RPM_BUILD_ROOT{%{_mandir}/man{1,3},/etc/rc.d/init.d,%{_sbindir}}
 
@@ -158,8 +161,6 @@ install man/man3/* $RPM_BUILD_ROOT%{_mandir}/man3
 
 # Examples
 cp -rf examples gexamples hoster misc tasker xep $RPM_BUILD_ROOT%{_examplesdir}/%{name}
-install %{SOURCE2}  $RPM_BUILD_ROOT%{_docdir}/%{name}/pvm-book.ps
-gzip -9nf $RPM_BUILD_ROOT%{_docdir}/%{name}/pvm-book.ps
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -176,7 +177,7 @@ rm -rf $RPM_BUILD_ROOT
 	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
 ##fi
 
-##%preun
+##%preun -n pvmd
 ##if [ "$1" = "0" ]; then
 ##	if [ -f /var/lock/subsys/pvmd ]; then
 ##		/etc/rc.d/init.d/pvmd stop >&2
@@ -186,7 +187,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-##%attr(755,root,root) /etc/rc.d/init.d/pvmd
 %attr(755,root,root) %{_bindir}/debugger
 %attr(755,root,root) %{_bindir}/debugger2
 %attr(755,root,root) %{_bindir}/pvmgetarch
@@ -194,8 +194,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pvm
 %attr(755,root,root) %{_bindir}/pvmgs
 %dir %{_pvm_root}
-%{_mandir}/man1/pvm*
-%{_mandir}/man1/PVM*
+%{_mandir}/man1/pvm.1*
+%{_mandir}/man1/pvm_intro.1*
+%{_mandir}/man1/PVM.1*
 
 %files devel
 %defattr(644,root,root,755)
@@ -214,10 +215,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files examples
 %defattr(644,root,root,755)
+%doc pvm-book.ps
 %{_examplesdir}/%{name}
-%{_docdir}/%{name}
 
 %files -n pvmd
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/pvmd3
-%attr(600,root,root) /etc/rc.d/init.d/pvmd
+%attr(755,root,root) /etc/rc.d/init.d/pvmd
+%{_mandir}/man1/pvmd*
+%{_mandir}/man1/pvm_shmd*

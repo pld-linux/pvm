@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# pvmd		pvmd (paralell virtual machine daemon)
+# pvmd		pvmd (Parallel Virtual Machine daemon)
 #
 # chkconfig:	345 65 45
 #
 # description:	PVM is a daemon which permits you to use libpvm3. This is
-#		a library which supports paralele computing.
+#		a library which supports parallel computing.
 
 
 # Source function library
