@@ -105,5 +105,3 @@ echo -n
 %attr(-,root,root) /usr/pvm3/xep/* 
 %attr(-,root,root) %doc Readme 
 %attr(-,root,root) %doc doc/* 
-
-%changelog
