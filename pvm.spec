@@ -4,7 +4,7 @@ Summary(pl):	Rozproszona Maszyna Wirtualna
 Summary(pt_BR):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.4
-Release:	2
+Release:	3
 License:	Free
 Group:		Development/Libraries
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
@@ -106,6 +106,16 @@ written in English.
 Pakiet zawiera przyk³ady u¿ycia PVM napisane w C oraz Fortranie, a
 tak¿e ksi±¿kê po angielsku.
 
+%package -n pvmd
+Summary:	PVM Daemon
+Summary(pl):	Serwer PVM
+Group:		Development/Libraries
+#Requires:	%{name}-devel = %{version}
+
+%description -n pvmd
+
+%description -n pvmd -l pl
+
 %prep
 %setup -q -n pvm3
 %patch0 -p1
@@ -156,12 +166,12 @@ rm -rf $RPM_BUILD_ROOT
 # Normal user can't use pvmd ran by another user (or root).
 # User who wants to run pvm, runs his own copy of pvmd.
 
-##%post
+%post -n pvmd
 ##/sbin/chkconfig --add pvmd
 ##if [ -f /var/lock/subsys/pvmd ]; then
 ##	/etc/rc.d/init.d/pvmd restart >&2
 ##else
-##	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
+	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
 ##fi
 
 ##%preun
@@ -181,7 +191,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pvmtmparch
 %attr(755,root,root) %{_bindir}/pvm
 %attr(755,root,root) %{_bindir}/pvmgs
-%attr(755,root,root) %{_sbindir}/pvmd3
 %dir %{_pvm_root}
 %{_mandir}/man1/pvm*
 
@@ -204,3 +213,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}
 %{_docdir}/%{name}
+
+%files -n pvmd
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_sbindir}/pvmd3
+%attr(600,root,root) /etc/rc.d/init.d/pvmd
