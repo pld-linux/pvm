@@ -27,7 +27,7 @@ case "$1" in
   start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/pvmd ]; then
-		show "Statrting Parallel Virtuall Machine"
+		show "Starting Parallel Virtual Machine"
 		pvmd3 >/dev/null &
 		deltext; ok
 		touch /var/lock/subsys/pvmd
