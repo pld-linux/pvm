@@ -39,7 +39,7 @@ for f in aimk cshrc.stub debugger debugger2 ipcfree pvm pvmd\
 done
 
 install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT/usr/include
-install lib/LINUX/lib*.a $RPM_BUILD_ROOT/usr/lib
+install lib/LINUX/lib*.a $RPM_BUILD_ROOT%{_libdir}
 
 install man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1
 install man/man3/* $RPM_BUILD_ROOT%{_mandir}/man3
@@ -91,10 +91,10 @@ echo -n
 %attr(-,root,root) /usr/include/pvm3.h
 %attr(-,root,root) /usr/include/pvmproto.h
 %attr(-,root,root) /usr/include/pvmtev.h
-%attr(-,root,root) /usr/lib/libfpvm3.a
-%attr(-,root,root) /usr/lib/libgpvm3.a
-%attr(-,root,root) /usr/lib/libpvm3.a
-%attr(-,root,root) /usr/lib/libpvmtrc.a
+%attr(-,root,root) %{_libdir}/libfpvm3.a
+%attr(-,root,root) %{_libdir}/libgpvm3.a
+%attr(-,root,root) %{_libdir}/libpvm3.a
+%attr(-,root,root) %{_libdir}/libpvmtrc.a
 %attr(-,root,root) %{_mandir}/man1/*
 %attr(-,root,root) %{_mandir}/man3/*
 %attr(-,root,root) /usr/pvm3/examples/* 
