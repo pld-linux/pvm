@@ -81,14 +81,14 @@ Requires:	%{name} = %{version}
 %description devel
 This package contains PVM header files and static libraries.
 
-%description -l es devel
+%description devel -l es
 Este paquete contiene los archivos de inclusión y bibliotecas que se
 necesitan para desarrollar programas que usan pvm.
 
 %description devel -l pl
 Pakiet zawiera pliki nag³ówkowe i biblioteki (statyczne) PVM.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 Este pacote contém os arquivos de inclusão e bibliotecas que são
 necessários para desenvolver programas que usam o pvm.
 
@@ -106,7 +106,7 @@ written in English.
 Pakiet zawiera przyk³ady u¿ycia PVM napisane w C oraz Fortranie, a
 tak¿e ksi±¿kê po angielsku.
 
-%prep 
+%prep
 %setup -q -n pvm3
 %patch0 -p1
 %patch1 -p1
