@@ -1,0 +1,21 @@
+diff -uNr pvm3.orig/src/lpvmpack.c pvm3/src/lpvmpack.c
+--- pvm3.orig/src/lpvmpack.c	Wed Feb 16 16:59:46 2000
++++ pvm3/src/lpvmpack.c	Wed Jun 14 17:19:02 2000
+@@ -1824,7 +1824,7 @@
+ 
+ 			case 'c':
+ 				if (isv) {
+-					tc = va_arg(ap, char);
++					tc = va_arg(ap, int);
+ 					cp = &tc;
+ 				} else
+ 					cp = va_arg(ap, char *);
+@@ -1849,7 +1849,7 @@
+ 				} else
+ 					if (vh) {
+ 						if (isv) {
+-							th = va_arg(ap, short);
++							th = va_arg(ap, int );
+ 							hp = &th;
+ 						} else
+ 							hp = va_arg(ap, short *);
