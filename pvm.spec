@@ -38,7 +38,7 @@ for f in aimk cshrc.stub debugger debugger2 ipcfree pvm pvmd\
 	install -m755 lib/ $RPM_BUILD_ROOT%{_bindir}
 done
 
-install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT/usr/include
+install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT%{_includedir}
 install lib/LINUX/lib*.a $RPM_BUILD_ROOT%{_libdir}
 
 install man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1
@@ -87,10 +87,10 @@ echo -n
 %attr(-,root,root) /usr/pvm3/lib/LINUX/pvm
 %attr(-,root,root) /usr/pvm3/lib/LINUX/pvmd3
 %attr(-,root,root) /usr/pvm3/lib/LINUX/pvmgs
-%attr(-,root,root) /usr/include/fpvm3.h
-%attr(-,root,root) /usr/include/pvm3.h
-%attr(-,root,root) /usr/include/pvmproto.h
-%attr(-,root,root) /usr/include/pvmtev.h
+%attr(-,root,root) %{_includedir}/fpvm3.h
+%attr(-,root,root) %{_includedir}/pvm3.h
+%attr(-,root,root) %{_includedir}/pvmproto.h
+%attr(-,root,root) %{_includedir}/pvmtev.h
 %attr(-,root,root) %{_libdir}/libfpvm3.a
 %attr(-,root,root) %{_libdir}/libgpvm3.a
 %attr(-,root,root) %{_libdir}/libpvm3.a
