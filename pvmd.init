@@ -24,6 +24,7 @@ else
 	exit 0
 fi
 
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -35,7 +36,6 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pvmd
 	else
 		msg_already_running "Parallel Virtual Machine"
-		exit 1
 	fi
 	;;
   stop)
@@ -45,20 +45,20 @@ case "$1" in
 		rm -f /var/run/pvmd.pid /var/lock/subsys/pvmd >/dev/null 2>&1
 	else
 		msg_not_running "Parallel Virtual Machine"
-		exit 1
 	fi	
 	;;
-  restart|reload|force-reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   status)
 	status pvmd3
 	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
