@@ -1,6 +1,6 @@
 Summary:	Parallel Virtual Machine
 Name:		pvm
-Version:	3.4.0
+Version:	3.4.3
 Release:	4
 License:	Free
 Group:		Development/Libraries
@@ -103,7 +103,7 @@ cp -rf {examples,gexamples,hoster,misc,tasker,xep} $RPM_BUILD_ROOT%{_examplesdir
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# what with these? normal user can't use pvmd ran by another user (or root)...
+# what about these? normal user can't use pvmd ran by another user (or root)...
 
 #%post
 #/sbin/chkconfig --add pvmd
