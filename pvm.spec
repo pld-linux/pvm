@@ -1,7 +1,8 @@
 Summary:	Parallel Virtual Machine
+Summary(pl):	Rozproszona Maszyna Wirtualna
 Name:		pvm
 Version:	3.4.3
-Release:	22
+Release:	23
 License:	Free
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -35,8 +36,13 @@ networks, such as ethernet, FDDI.
 User programs written in C, C++ or Fortran access PVM through library
 routines.
 
+%description -l pl
+PVM jest systemem pozwalaj±cym na u¿ywanie zestawu heterogenicznych
+komputerów jako jednej maszyny.
+
 %package devel
 Summary:	PVM header files and static libraries
+Summary(pl):	Pliki nag³ówkowe i biblioteki statyczne PVM
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
@@ -46,8 +52,12 @@ Requires:	pvm = %{version}
 %description devel
 This package contains PVM header files and static libraries.
 
+%description devel -l pl
+Pakiet zawiera pliki nag³ówkowe i biblioteki (statyczne) PVM.
+
 %package examples
 Summary:	PVM examples
+Summary(pl):	Przyk³ady u¿ycia PVM
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
@@ -55,8 +65,12 @@ Group(pl):	Programowanie/Biblioteki
 Requires:	pvm-devel = %{version}
 
 %description examples
-This package contains PVM examples written in Cxr, and book written in english.
+This package contains PVM examples written in C and Fortran, and book
+written in English.
 
+%description examples -l pl
+Pakiet zawiera przyk³ady u¿ycia PVM napisane w C oraz Fortranie, a tak¿e
+ksi±¿kê po angielsku.
 
 %prep 
 %setup -q -n pvm3
@@ -68,8 +82,7 @@ This package contains PVM examples written in Cxr, and book written in english.
 cp -f lib/aimk lib/aimk.tmp
 sed -e "s!@PVM_ROOT@!%{_pvm_root}!" -e "s!@PVM_ARCH@!%{_pvm_arch}!" lib/aimk.tmp > lib/aimk
 
-PCFLOPTS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
-PCFLOPTS="$PCFLOPTS -DDEFBINDIR=\\\"\\\x24HOME/pvm3/bin/\\\x24PVM_ARCH\\\""
+PCFLOPTS="%{rpmcflags} -DDEFBINDIR=\\\"\\\x24HOME/pvm3/bin/\\\x24PVM_ARCH\\\""
 PCFLOPTS="$PCFLOPTS -DDEFDEBUGGER=\\\"%{_bindir}/debugger2\\\""
 PCFLOPTS="$PCFLOPTS -DPVMDPATH=\\\"%{_sbindir}/pvmd3\\\""
 PCFLOPTS="$PCFLOPTS -DPVMROOT=\\\"%{_pvm_root}\\\""
@@ -95,12 +108,8 @@ install conf/%{_pvm_arch}.def $RPM_BUILD_ROOT%{_pvm_root}/conf
 install include/{fpvm3,pvm3,pvmproto,pvmtev}.h $RPM_BUILD_ROOT%{_includedir}
 install lib/%{_pvm_arch}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 
-# fix manuals
-cd man
-for f in man[13]/* ; do
-	sed -e "s@\.so man./@.so @" $f >$RPM_BUILD_ROOT%{_mandir}/$f
-done
-cd -
+install man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1
+install man/man3/* $RPM_BUILD_ROOT%{_mandir}/man3
 
 # Examples
 cp -rf examples gexamples hoster misc tasker xep $RPM_BUILD_ROOT%{_examplesdir}/%{name}
@@ -110,27 +119,29 @@ gzip -9nf $RPM_BUILD_ROOT%{_docdir}/%{name}/pvm-book.ps
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# what about these? normal user can't use pvmd ran by another user (or root)...
+# NOTE: don't uncomment scripts unless you do something with this:
+# Normal user can't use pvmd ran by another user (or root).
+# User who wants to run pvm, runs his own copy of pvmd.
 
-%post
-/sbin/chkconfig --add pvmd
-if [ -f /var/lock/subsys/pvmd ]; then
-	/etc/rc.d/init.d/pvmd restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
-fi
+##%post
+##/sbin/chkconfig --add pvmd
+##if [ -f /var/lock/subsys/pvmd ]; then
+##	/etc/rc.d/init.d/pvmd restart >&2
+##else
+##	echo "Run \"/etc/rc.d/init.d/pvmd start\" to start PVM daemon." >&2
+##fi
 
-#%preun
-if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/pvmd ]; then
-		/etc/rc.d/init.d/pvmd stop >&2
-	fi
-	/sbin/chkconfig --del pvmd
-fi
+##%preun
+##if [ "$1" = "0" ]; then
+##	if [ -f /var/lock/subsys/pvmd ]; then
+##		/etc/rc.d/init.d/pvmd stop >&2
+##	fi
+##	/sbin/chkconfig --del pvmd
+##fi
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) /etc/rc.d/init.d/pvmd
+##%attr(755,root,root) /etc/rc.d/init.d/pvmd
 %attr(755,root,root) %{_bindir}/debugger
 %attr(755,root,root) %{_bindir}/debugger2
 %attr(755,root,root) %{_bindir}/pvmgetarch
