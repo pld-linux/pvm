@@ -2,28 +2,32 @@ Summary:	Parallel Virtual Machine
 Name:		pvm
 Version:	3.4.0
 Release:	4
-Copyright:	free
+License:	Free
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
-Source1:	pvmd.init
-Patch0:		pvm-aimk.patch
-Patch1:		pvm-noenv.patch
+Source1:	%{name}d.init
+Patch0:		%{name}-aimk.patch
+Patch1:		%{name}-noenv.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel
-#Prereq:		/sbin/chkconfig
+#Prereq:	/sbin/chkconfig
 
-%define _pvm_root 	%{_datadir}/pvm3
-%define _pvm_arch	LINUX
+%define		_pvm_root 	%{_datadir}/pvm3
+%define		_pvm_arch	LINUX
 
 %description
 PVM is a software system that enables a collection of heterogeneous
-computers to be used as a coherent and flexible concurrent computational
-resource.
+computers to be used as a coherent and flexible concurrent
+computational resource.
 
-The individual computers may be shared- or local-memory multiprocessors,
-vector supercomputers, specialized graphics engines, or scalar workstations,
-that may be interconnected by a variety of networks, such as ethernet, FDDI.
+The individual computers may be shared- or local-memory
+multiprocessors, vector supercomputers, specialized graphics engines,
+or scalar workstations, that may be interconnected by a variety of
+networks, such as ethernet, FDDI.
 
 User programs written in C, C++ or Fortran access PVM through library
 routines.
@@ -31,6 +35,9 @@ routines.
 %package devel
 Summary:	PVM header files and static libraries
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	pvm = %{version}
 
 %description devel
@@ -39,6 +46,9 @@ This package contains PVM header files and static libraries.
 %package examples
 Summary:	PVM examples
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	pvm-devel = %{version}
 
 %description examples
@@ -63,17 +73,11 @@ PVM_ROOT=`pwd` make CFLOPTS="$PCFLOPTS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_pvm_root}/conf} \
+	$RPM_BUILD_ROOT%{_examplesdir}/%{name}/{examples,gexamples,hoster,misc,tasker,xep} \
+	$RPM_BUILD_ROOT{%{_mandir}/man{1,3},/etc/rc.d/init.d,%{_sbindir}}
 
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -d $RPM_BUILD_ROOT%{_includedir}
-install -d $RPM_BUILD_ROOT%{_libdir}
-install -d $RPM_BUILD_ROOT%{_pvm_root}/conf
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}/{examples,gexamples,hoster,misc,tasker,xep}
-install -d $RPM_BUILD_ROOT%{_mandir}/{man1,man3}
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
-install -d $RPM_BUILD_ROOT%{_sbindir}
-
-install %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pvmd
+install %{SOURCE1}  $RPM_BUILD_ROOT/etc/rc.d/init.d/pvmd
 
 install lib/%{_pvm_arch}/{pvm,pvmgs} $RPM_BUILD_ROOT%{_bindir}
 install lib/%{_pvm_arch}/pvmd3 $RPM_BUILD_ROOT%{_sbindir}
@@ -89,7 +93,7 @@ install lib/%{_pvm_arch}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 # fix manuals
 cd man
 for f in man[13]/* ; do
-  sed -e "s@\.so man./@.so @" $f >$RPM_BUILD_ROOT%{_mandir}/$f
+	sed -e "s@\.so man./@.so @" $f >$RPM_BUILD_ROOT%{_mandir}/$f
 done
 cd -
 
@@ -119,7 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_sysconfdir}/rc.d/init.d/pvmd
+%attr(755,root,root) /etc/rc.d/init.d/pvmd
 %attr(755,root,root) %{_bindir}/debugger
 %attr(755,root,root) %{_bindir}/debugger2
 %attr(755,root,root) %{_bindir}/pvmgetarch
