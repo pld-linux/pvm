@@ -1,0 +1,12 @@
+diff -dur pvm3.orig/lib/pvmgetarch pvm3/lib/pvmgetarch
+--- pvm3.orig/lib/pvmgetarch	2001-09-27 23:24:04.000000000 +0200
++++ pvm3/lib/pvmgetarch	2004-01-07 14:12:42.892680872 +0100
+@@ -68,6 +68,7 @@
+ 	*,CRAY-2 )              ARCH=CRAY2 ;;
+ 	Linux,i[3456]86 )       ARCH=LINUX ;;
+ 	Linux,ia64 )            ARCH=LINUX64 ;;
++	Linux,x86_64 )          ARCH=LINUX64 ;;
+ 	Linux,alpha )           ARCH=LINUXALPHA ;;
+ 	Linux,arm* )            ARCH=LINUXARM ;;
+ 	Linux,sparc* )          ARCH=LINUXSPARC ;;
+Only in pvm3/lib: pvmgetarch~
