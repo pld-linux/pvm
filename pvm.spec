@@ -1,13 +1,19 @@
 Summary:	Parallel Virtual Machine
+Summary(es):	Máquina virtual paralela
 Summary(pl):	Rozproszona Maszyna Wirtualna
+Summary(pt_BR):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.4
 Release:	1
 License:	Free
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
 Source1:	%{name}d.init
 Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
@@ -25,7 +31,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_pvm_arch	LINUX
 %else
 %ifarch alpha
-%define		_pvm_arch	LINUXAPLHA
+%define		_pvm_arch	LINUXALPHA
 %else
 %ifarch sparc sparc64
 %define		_pvm_arch	LINUXSPARC
@@ -57,32 +63,60 @@ networks, such as ethernet, FDDI.
 User programs written in C, C++ or Fortran access PVM through library
 routines.
 
+%description -l es
+PVM suministra una biblioteca de envío de mensajes y un ambiente que
+puede configurarse en "runtime", en una gran variedad de plataformas
+de multiprocesamiento.
+
 %description -l pl
 PVM jest systemem pozwalaj±cym na u¿ywanie zestawu heterogenicznych
 komputerów jako jednej maszyny.
 
+%description -l pt_BR
+O PVM provê uma biblioteca de envio de mensagens e ambiente que pode
+ser configurado em "runtime", em uma variedade de plataformas de
+multiprocessamento.
+
 %package devel
 Summary:	PVM header files and static libraries
+Summary(es):	Archivos de inclusión y bibliotecas para pvm
 Summary(pl):	Pliki nag³ówkowe i biblioteki statyczne PVM
+Summary(pt_BR):	Arquivos de inclusão e bibliotecas para o pvm
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
 This package contains PVM header files and static libraries.
 
+%description -l es devel
+Este paquete contiene los archivos de inclusión y bibliotecas que se
+necesitan para desarrollar programas que usan pvm.
+
 %description devel -l pl
 Pakiet zawiera pliki nag³ówkowe i biblioteki (statyczne) PVM.
+
+%description -l pt_BR devel
+Este pacote contém os arquivos de inclusão e bibliotecas que são
+necessários para desenvolver programas que usam o pvm.
 
 %package examples
 Summary:	PVM examples
 Summary(pl):	Przyk³ady u¿ycia PVM
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description examples
@@ -90,8 +124,8 @@ This package contains PVM examples written in C and Fortran, and book
 written in English.
 
 %description examples -l pl
-Pakiet zawiera przyk³ady u¿ycia PVM napisane w C oraz Fortranie, a tak¿e
-ksi±¿kê po angielsku.
+Pakiet zawiera przyk³ady u¿ycia PVM napisane w C oraz Fortranie, a
+tak¿e ksi±¿kê po angielsku.
 
 %prep 
 %setup -q -n pvm3
