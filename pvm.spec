@@ -68,7 +68,7 @@ This package contains PVM examples written in Cxr, and book written in english.
 cp -f lib/aimk lib/aimk.tmp
 sed -e "s!@PVM_ROOT@!%{_pvm_root}!" -e "s!@PVM_ARCH@!%{_pvm_arch}!" lib/aimk.tmp > lib/aimk
 
-PCFLOPTS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
+PCFLOPTS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
 PCFLOPTS="$PCFLOPTS -DDEFBINDIR=\\\"\\\x24HOME/pvm3/bin/\\\x24PVM_ARCH\\\""
 PCFLOPTS="$PCFLOPTS -DDEFDEBUGGER=\\\"%{_bindir}/debugger2\\\""
 PCFLOPTS="$PCFLOPTS -DPVMDPATH=\\\"%{_sbindir}/pvmd3\\\""
