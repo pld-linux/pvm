@@ -9,6 +9,7 @@ Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
 Source1:	%{name}d.init
+Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
 Patch0:		%{name}-aimk.patch
 Patch1:		%{name}-noenv.patch
 Patch2:		%{name}-vaargfix.patch
@@ -54,7 +55,8 @@ Group(pl):	Programowanie/Biblioteki
 Requires:	pvm-devel = %{version}
 
 %description examples
-This package contains PVM examples written in C.
+This package contains PVM examples written in Cxr, and book written in english.
+
 
 %prep 
 %setup -q -n pvm3
@@ -76,7 +78,7 @@ PVM_ROOT=`pwd` make CFLOPTS="$PCFLOPTS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_pvm_root}/conf} \
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_pvm_root}/conf,%{_docdir}/%{name}} \
 	$RPM_BUILD_ROOT%{_examplesdir}/%{name}/{examples,gexamples,hoster,misc,tasker,xep} \
 	$RPM_BUILD_ROOT{%{_mandir}/man{1,3},/etc/rc.d/init.d,%{_sbindir}}
 
@@ -102,6 +104,8 @@ cd -
 
 # Examples
 cp -rf examples gexamples hoster misc tasker xep $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+install %{SOURCE2}  $RPM_BUILD_ROOT%{_docdir}/%{name}/pvm-book.ps
+gzip -9nf $RPM_BUILD_ROOT%{_docdir}/%{name}/pvm-book.ps
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -155,3 +159,4 @@ fi
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}
+%{_docdir}/%{name}
