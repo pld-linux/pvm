@@ -22,7 +22,28 @@ Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pvm_root 	%{_libdir}/pvm3
+%ifarch %{ix86}
 %define		_pvm_arch	LINUX
+%else
+%ifarch alpha
+%define		_pvm_arch	LINUXAPLHA
+%else
+%ifarch sparc sparc64
+%define		_pvm_arch	LINUXSPARC
+%else
+%ifarch ppc
+%define		_pvm_arch	LINUXPPC
+%else
+%ifarch hppa
+%define		_pvm_arch	LINUXHPPA
+%else
+%error "Unsupported architecture"
+exit 1
+%endif
+%endif
+%endif
+%endif
+%endif
 
 %description
 PVM is a software system that enables a collection of heterogeneous
