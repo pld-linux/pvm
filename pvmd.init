@@ -4,8 +4,8 @@
 #
 # chkconfig:	345 65 45
 #
-# description:  PVM is a daemon which permits you to use libpvm3. This is a library
-#		which supports paralele computing.	
+# description:  PVM is a daemon which permits you to use libpvm3. This is
+#		a library which supports paralele computing.
 
 
 # Source function library
@@ -19,33 +19,31 @@ if is_no "${NETWORKING}"; then
         msg_Network_Down pvmd
         exit 1
 fi
-export PVM_ROOT=/usr/share/pvm3
-			
 
 # See how we were called.
 case "$1" in
   start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/pvmd ]; then
-		show "Starting Parallel Virtual Machine"
-		pvmd3 >/dev/null &
-		deltext; ok
-		touch /var/lock/subsys/pvmd
+		msg_starting "Parallel Virtual Machine"
+		daemon pvmd3 &
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pvmd
 	else
-		msg_Already_Running pvmd
+		msg_Already_Running "Parallel Virtual Machine"
 	fi
 	;;
   stop)
         if [ -f /var/lock/subsys/pvmd ]; then
-		msg_stopping pvmd
+		msg_stopping "Parallel Virtual Machine"
 		killproc pvmd3
 		rm -f /var/run/pvmd.pid /var/lock/subsys/pvmd >/dev/null 2>&1
 	else
-		msg_Not_Running pvmd
+		msg_Not_Running "Parallel Virtual Machine"
 		exit 1
 	fi	
 	;;
-  restart)
+  restart|reload|force-reload)
 	$0 stop
 	$0 start
 	;;
@@ -54,6 +52,8 @@ case "$1" in
 	exit $?
 	;;
   *)
-	msg_Usage "$0 {start|stop|status|restart}"
+	msg_Usage "$0 {start|stop|status|restart|reload|force-reload}"
 	exit 1
 esac
+
+exit $RETVAL
