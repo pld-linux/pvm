@@ -3,7 +3,7 @@ Name:		pvm
 Version:	3.40
 Release:	1
 Copyright:	
-Group:		Development/Library
+Group:		Development/Libraries
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}.%{version}.tar.gz
 BuildRoot:	/tmp/%{name}-%{version}-root
 
