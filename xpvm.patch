@@ -1,6 +1,6 @@
---- xpvm/src/Makefile.aimk.wanger	Thu Apr  9 17:11:22 1998
-+++ xpvm/src/Makefile.aimk	Mon Jan 24 14:35:49 2000
-@@ -39,29 +39,29 @@
+--- xpvm/src/Makefile.aimk.orig	Thu Apr  9 23:11:22 1998
++++ xpvm/src/Makefile.aimk	Tue Dec 26 02:41:01 2000
+@@ -39,36 +39,36 @@
  #
  
  # Personal Installation
@@ -40,8 +40,24 @@
  
  # Tcl / Tk 8.1
  #TCLLIB		=	-ltcl8.1
-@@ -80,22 +80,22 @@
- #TKLIB		=	-ltk
+ #TKLIB		=	-ltk8.1
+ # Tcl / Tk 8.0
+-TCLLIB		=	-ltcl8.0
+-TKLIB		=	-ltk8.0
++#TCLLIB		=	-ltcl8.0
++#TKLIB		=	-ltk8.0
+ # Tcl 7.6 / Tk 4.2
+ #TCLLIB		=	-ltcl7.6
+ #TKLIB		=	-ltk4.2
+@@ -76,26 +76,27 @@
+ #TCLLIB		=	-ltcl7.5
+ #TKLIB		=	-ltk4.1
+ # Tcl 7.4 / Tk 4.0, Tcl 7.3 / Tk 3.6
+-#TCLLIB		=	-ltcl
+-#TKLIB		=	-ltk
++# ...or any tcl/tk with symlinks
++TCLLIB		=	-ltcl
++TKLIB		=	-ltk
  
  # Generic X11 System
 -XINCL		=
