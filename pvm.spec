@@ -7,13 +7,6 @@ Version:	3.4.4
 Release:	2
 License:	Free
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
 Source1:	%{name}d.init
 Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
@@ -83,13 +76,6 @@ Summary(es):	Archivos de inclusiСn y bibliotecas para pvm
 Summary(pl):	Pliki nagЁСwkowe i biblioteki statyczne PVM
 Summary(pt_BR):	Arquivos de inclusЦo e bibliotecas para o pvm
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -110,13 +96,6 @@ necessАrios para desenvolver programas que usam o pvm.
 Summary:	PVM examples
 Summary(pl):	PrzykЁady u©ycia PVM
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description examples
