@@ -1,77 +1,68 @@
 diff -Nur pvm3.pre/src/global.h pvm3/src/global.h
---- pvm3.pre/src/global.h	Thu Jan 28 19:54:58 1999
-+++ pvm3/src/global.h	Tue Dec 26 14:48:29 2000
-@@ -243,24 +243,8 @@
- #define DEFBINDIR	"$PVM_ROOT\\bin\\$PVM_ARCH"
+--- pvm3.pre/src/global.h	Thu Jul  8 21:00:20 1999
++++ pvm3/src/global.h	Wed Jan  3 19:30:38 2001
+@@ -255,12 +255,8 @@
+ #define	DEFDEBUGGER	"$PVM_ROOT/lib/debugger"
  #endif
  
--#ifndef	DEFBINDIR
--#define	DEFBINDIR	"$HOME/pvm3/bin/$PVM_ARCH:$PVM_ROOT/bin/$PVM_ARCH"
--#endif
--
--#ifndef	DEFDEBUGGER
--#define	DEFDEBUGGER	"$PVM_ROOT/lib/debugger"
--#endif
--
 -#ifndef	PVMDFILE
  #ifdef IMA_OS2
  #define PVMDFILE	"lib/pvmd.cmd"
 -#else
 -#define	PVMDFILE	"lib/pvmd"
 -#endif
--#endif
--
--#ifndef	PVMDPATH
--#define	PVMDPATH	"$PVM_ROOT/lib/pvmd"
  #endif
  
- #ifndef	WINPVMDPATH
+ #ifndef	PVMDPATH
 diff -Nur pvm3.pre/src/pvmcruft.c pvm3/src/pvmcruft.c
---- pvm3.pre/src/pvmcruft.c	Tue Mar 16 17:29:56 1999
-+++ pvm3/src/pvmcruft.c	Tue Dec 26 14:32:57 2000
-@@ -728,12 +728,10 @@
+--- pvm3.pre/src/pvmcruft.c	Wed Mar 29 22:04:12 2000
++++ pvm3/src/pvmcruft.c	Wed Jan  3 19:40:57 2001
+@@ -778,43 +778,7 @@
  char *
  pvmgetroot()
  {
-+#ifdef IMA_CSPP
- 	static char *rd = 0;
- 
- 	if (!rd) {
+-	static char *rd = 0;
+-
+-	if (!rd) {
 -
 -#ifdef IMA_CSPP
 -
- 		struct stat buf;
- 
- 		rd = STRALLOC("/usr/convex/pvm");
-@@ -746,13 +744,6 @@
- 		pvmputenv("PVM_ROOT=/usr/convex/pvm");
- 		pvmlogerror("Defaulting PVM_ROOT to /usr/convex/pvm");
- 
+-		struct stat buf;
+-
+-		rd = STRALLOC("/usr/convex/pvm");
+-		if (stat(rd, &buf) == -1) {
+-			pvmlogperror(
+-				"Unable to default PVM_ROOT to /usr/convex/pvm");
+-			pvmbailout(0);
+-			exit(1);		/* the other meaning of bail out */
+-		}
+-		pvmputenv("PVM_ROOT=/usr/convex/pvm");
+-		pvmlogerror("Defaulting PVM_ROOT to /usr/convex/pvm");
+-
 -#else
 -
 -		rd = getenv("PVM_ROOT");
 -
+-#ifdef WIN32
+-		if (!rd)
+-			rd = read_pvmregistry("PVM_ROOT");
 -#endif
--/* IMA_CSPP */
 -
- 		if (!rd) {
- 			pvmlogerror("PVM_ROOT environment variable not set.\n");
- 			pvmbailout(0);
-@@ -761,6 +752,13 @@
- 	}
- 
- 	return rd;
-+#else
-+
+-#endif
+-
+-		if (!rd) {
+-			pvmlogerror("PVM_ROOT environment variable not set.\n");
+-			pvmbailout(0);
+-			exit(1);		/* the other meaning of bail out */
+-		}
+-	}
+-
+-	return rd;
 +	return PVMROOT;
-+
-+#endif
-+/* IMA_CSPP */
-+
  }
  
  
-@@ -800,19 +798,7 @@
+@@ -881,19 +845,7 @@
  char *
  pvmgetpvmd()
  {
