@@ -1,0 +1,71 @@
+--- xpvm/src/Makefile.aimk.wanger	Thu Apr  9 17:11:22 1998
++++ xpvm/src/Makefile.aimk	Mon Jan 24 14:35:49 2000
+@@ -39,29 +39,29 @@
+ #
+ 
+ # Personal Installation
+-TCLTKHOME	=	$(HOME)/TCL
++#TCLTKHOME	=	$(HOME)/TCL
+ # System Installation
+-#TCLTKHOME	=	/usr/local/lib
++TCLTKHOME	=	/usr/lib
+ 
+ # Tcl 7.5 / Tk 4.1 and above
+-TCLINCL		=	-I$(TCLTKHOME)/tcl/generic
+-TKINCL		=	-I$(TCLTKHOME)/tk/generic
++#TCLINCL	=	-I$(TCLTKHOME)/tcl/generic
++#TKINCL		=	-I$(TCLTKHOME)/tk/generic
+ # Tcl 7.4 / Tk 4.0 and below
+ #TCLINCL	=	-I$(TCLTKHOME)/tcl
+ #TKINCL		=	-I$(TCLTKHOME)/tk
+ # System Installed Tcl / Tk
+-#TCLINCL	=	-I$(TCLTKHOME)
+-#TKINCL		=	-I$(TCLTKHOME)
++TCLINCL		=	-I$(TCLTKHOME)
++TKINCL		=	-I$(TCLTKHOME)
+ 
+ # Tcl 7.5 / Tk 4.1 and above
+-TCLLIBDIR	=	-L$(TCLTKHOME)/tcl/unix/$(PVM_ARCH)
+-TKLIBDIR	=	-L$(TCLTKHOME)/tk/unix/$(PVM_ARCH)
++#TCLLIBDIR	=	-L$(TCLTKHOME)/tcl/unix/$(PVM_ARCH)
++#TKLIBDIR	=	-L$(TCLTKHOME)/tk/unix/$(PVM_ARCH)
+ # Tcl 7.4 / Tk 4.0 and below
+ #TCLLIBDIR	=	-L$(TCLTKHOME)/tcl/$(PVM_ARCH)
+ #TKLIBDIR	=	-L$(TCLTKHOME)/tk/$(PVM_ARCH)
+ # System Installed Tcl / Tk
+-#TCLLIBDIR	=	-L$(TCLTKHOME)
+-#TKLIBDIR	=	-L$(TCLTKHOME)
++TCLLIBDIR	=	-L$(TCLTKHOME)
++TKLIBDIR	=	-L$(TCLTKHOME)
+ 
+ # Tcl / Tk 8.1
+ #TCLLIB		=	-ltcl8.1
+@@ -80,22 +80,22 @@
+ #TKLIB		=	-ltk
+ 
+ # Generic X11 System
+-XINCL		=
+-XLIBDIR		=
++#XINCL		=
++#XLIBDIR		=
+ # Default Locations...
+ #XINCL		=	-I/usr/include/X11
+ #XLIBDIR	=	-L/usr/lib
+ # Linux Like Systems
+-#XINCL		=	-I/usr/X11R6/include
+-#XLIBDIR	=	-L/usr/X11R6/lib
++XINCL		=	-I/usr/X11R6/include
++XLIBDIR		=	-L/usr/X11R6/lib
+ 
+ XLIB		=	-lX11 
+ #XLIB		=	-lX11 -lXpm
+ 
+ # Non-Shared Library Systems
+-SHLIB		=
++#SHLIB		=
+ # Linux, BSD, SunOS Shared Library Systems
+-#SHLIB		=	-ldl
++SHLIB		=	-ldl
+ # IBM Shared Library Systems
+ #SHLIB		=	-lld
+ # HP, Some Linux Shared Library Systems
