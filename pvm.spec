@@ -4,7 +4,7 @@ Summary(pl):	Rozproszona Maszyna Wirtualna
 Summary(pt_BR):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.4
-Release:	1
+Release:	2
 License:	Free
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -136,7 +136,7 @@ tak¿e ksi±¿kê po angielsku.
 cp -f lib/aimk lib/aimk.tmp
 sed -e "s!@PVM_ROOT@!%{_pvm_root}!" -e "s!@PVM_ARCH@!%{_pvm_arch}!" lib/aimk.tmp > lib/aimk
 
-PCFLOPTS="%{rpmcflags} -DDEFBINDIR=\\\"%{_pvm_root}/pvm3/bin/\\\x24PVM_ARCH\\\""
+PCFLOPTS="%{rpmcflags} -DDEFBINDIR=\\\"%{_pvm_root}/bin/\\\x24PVM_ARCH\\\""
 PCFLOPTS="$PCFLOPTS -DDEFDEBUGGER=\\\"%{_bindir}/debugger2\\\""
 PCFLOPTS="$PCFLOPTS -DPVMDPATH=\\\"%{_sbindir}/pvmd3\\\""
 PCFLOPTS="$PCFLOPTS -DPVMROOT=\\\"%{_pvm_root}\\\""
