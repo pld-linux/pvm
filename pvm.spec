@@ -51,8 +51,8 @@ as well as the ability to monitor cluster performance.
 %patch1 -p1
 
 %build
-PVM_ROOT=`pwd` make CFLOPTS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
-PVM_ROOT=`pwd` XPVM_ROOT=`pwd`/xpvm make -C xpvm CFLOPTS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
+PVM_ROOT=`pwd` make CFLOPTS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
+PVM_ROOT=`pwd` XPVM_ROOT=`pwd`/xpvm make -C xpvm CFLOPTS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
