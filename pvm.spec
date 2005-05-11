@@ -17,8 +17,9 @@ Patch1:		%{name}-noenv.patch
 Patch2:		%{name}-amd64.patch
 URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
 BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	readline-devel
 BuildRequires:	m4
+BuildRequires:	readline-devel
+BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pvm_root 	%{_libdir}/pvm3
@@ -37,7 +38,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %ifarch hppa
 %define		_pvm_arch	LINUXHPPA
 %else
-%ifarch amd64
+%ifarch %{x8664}
 %define		_pvm_arch	LINUX64
 %else
 %error "Unsupported architecture"
