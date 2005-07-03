@@ -3,18 +3,17 @@ Summary(es):	Máquina virtual paralela
 Summary(pl):	Rozproszona Maszyna Wirtualna
 Summary(pt_BR):	Máquina virtual paralela
 Name:		pvm
-Version:	3.4.4
-Release:	4
+Version:	3.4.5
+Release:	1
 License:	Free
 Group:		Applications/Networking
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
-# Source0-md5:	806abe9a866eab5981383c17ff9ed175
+# Source0-md5:	086e6d707b40adba04bddba8e5b6b17d
 Source1:	%{name}d.init
 Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
 # Source2-md5:	4a2f619000d672f572f9678a46e4e2d1
 Patch0:		%{name}-aimk.patch
 Patch1:		%{name}-noenv.patch
-Patch2:		%{name}-amd64.patch
 URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	m4
@@ -129,7 +128,6 @@ Demon PVM.
 %setup -q -n %{name}3
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 cp %{SOURCE2} .
 
