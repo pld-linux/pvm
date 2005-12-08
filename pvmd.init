@@ -45,7 +45,7 @@ case "$1" in
 		rm -f /var/run/pvmd.pid /var/lock/subsys/pvmd >/dev/null 2>&1
 	else
 		msg_not_running "Parallel Virtual Machine"
-	fi	
+	fi
 	;;
   restart|force-reload)
 	$0 stop
