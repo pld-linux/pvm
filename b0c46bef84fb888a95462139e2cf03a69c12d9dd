@@ -1,0 +1,3 @@
+- release 24
+- PVM_ROOT moved to %{_libdir}/pvm3
+- DEFBINDIR moved to PVM_ROOT/bin/PVM_ARCH
