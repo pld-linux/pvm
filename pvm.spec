@@ -15,8 +15,8 @@ Source2:	ftp://www.netlib.org/pvm3/book/%{name}-book.ps
 Patch0:		%{name}-aimk.patch
 Patch1:		%{name}-noenv.patch
 URL:		http://www.epm.ornl.gov/pvm/pvm_home.html
-BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	m4
+BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -82,7 +82,7 @@ Summary(es):	Archivos de inclusión y bibliotecas para pvm
 Summary(pl):	Pliki nag³ówkowe i biblioteki statyczne PVM
 Summary(pt_BR):	Arquivos de inclusão e bibliotecas para o pvm
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains PVM header files and static libraries.
@@ -102,7 +102,7 @@ necessários para desenvolver programas que usam o pvm.
 Summary:	PVM examples
 Summary(pl):	Przyk³ady u¿ycia PVM
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description examples
 This package contains PVM examples written in C and Fortran, and book
