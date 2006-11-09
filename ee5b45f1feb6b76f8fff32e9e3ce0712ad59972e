@@ -1,0 +1,6 @@
+- Release 4:
+- devel and examples subpackages
+- examples to %{_examplesdir}, not %{_docdir}
+- fix manuals
+- moved xpvm to separate package (xpvm)
+- setting PVM_ROOT no longer needed
