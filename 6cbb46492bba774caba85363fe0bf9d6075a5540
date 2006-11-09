@@ -1,0 +1,5 @@
+- back commented out scripts and init file - see NOTE
+  please don't uncomment it unless you change pvm behaviour
+- removed "man fix" - man package was broken, now is fixed
+- use %rpmcflags, added pl translations
+- release 23
