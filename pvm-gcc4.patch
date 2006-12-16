@@ -1,0 +1,52 @@
+--- pvm3/src/global.h.orig	2001-02-08 00:14:03.000000000 +0100
++++ pvm3/src/global.h	2006-12-16 10:09:29.000000000 +0100
+@@ -156,6 +156,8 @@
+  *
+  */
+ 
++#include "pvmtev.h"
++ 
+ 
+ /* UDPMAXLEN should be set to the largest UDP message length
+    your system can handle. */
+@@ -318,6 +320,9 @@
+ 
+ /* General Trace Globals Declarations */
+ 
++struct Pvmtevdid;
++struct Pvmtevinfo;
++
+ extern	struct Pvmtevdid pvmtevdidlist[];
+ 
+ extern	struct Pvmtevinfo pvmtevinfo[];
+--- pvm3/src/lpvmgen.c.orig	2004-02-17 19:01:29.000000000 +0100
++++ pvm3/src/lpvmgen.c	2006-12-16 10:09:29.000000000 +0100
+@@ -674,6 +674,8 @@
+ 
+ struct pmsg *midtobuf();
+ 
++char *pvmnametag(int tag, int *found);
++
+ 
+ /***************
+  **  Private  **
+--- pvm3/src/pvmd.c.orig	2004-09-08 21:35:36.000000000 +0200
++++ pvm3/src/pvmd.c	2006-12-16 10:09:29.000000000 +0100
+@@ -1712,6 +1712,7 @@
+ 	gettimeofday(&tnow, (struct timezone*)0);
+ 	if (pvmdebmask || myhostpart) {
+ 		PVM_TIMET time_temp;
++		char retbuf[32];
+ 		pvmlogprintf("%s (%s) %s %s\n",
+ 				hosts->ht_hosts[hosts->ht_local]->hd_name,
+ 				inadport_decimal(&hosts->ht_hosts[hosts->ht_local]->hd_sad),
+@@ -1719,7 +1720,8 @@
+ 				PVM_VER);
+ 		pvmlogprintf("ready ");
+ 		time_temp = (PVM_TIMET) tnow.tv_sec;
+-		pvmlogprintf(ctime(&time_temp));
++		ctime_r(&time_temp, retbuf);
++		pvmlogprintf(retbuf);
+ 	}
+ 
+ 	/*
