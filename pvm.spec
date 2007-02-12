@@ -1,7 +1,7 @@
 Summary:	Parallel Virtual Machine
-Summary(es):	M·quina virtual paralela
-Summary(pl):	Rozproszona Maszyna Wirtualna
-Summary(pt_BR):	M·quina virtual paralela
+Summary(es.UTF-8):   M√°quina virtual paralela
+Summary(pl.UTF-8):   Rozproszona Maszyna Wirtualna
+Summary(pt_BR.UTF-8):   M√°quina virtual paralela
 Name:		pvm
 Version:	3.4.5
 Release:	1
@@ -63,45 +63,45 @@ networks, such as ethernet, FDDI.
 User programs written in C, C++ or Fortran access PVM through library
 routines.
 
-%description -l es
-PVM suministra una biblioteca de envÌo de mensajes y un ambiente que
+%description -l es.UTF-8
+PVM suministra una biblioteca de env√≠o de mensajes y un ambiente que
 puede configurarse en "runtime", en una gran variedad de plataformas
 de multiprocesamiento.
 
-%description -l pl
-PVM jest systemem pozwalaj±cym na uøywanie zestawu heterogenicznych
-komputerÛw jako jednej maszyny.
+%description -l pl.UTF-8
+PVM jest systemem pozwalajƒÖcym na u≈ºywanie zestawu heterogenicznych
+komputer√≥w jako jednej maszyny.
 
-%description -l pt_BR
-O PVM provÍ uma biblioteca de envio de mensagens e ambiente que pode
+%description -l pt_BR.UTF-8
+O PVM prov√™ uma biblioteca de envio de mensagens e ambiente que pode
 ser configurado em "runtime", em uma variedade de plataformas de
 multiprocessamento.
 
 %package devel
 Summary:	PVM header files and static libraries
-Summary(es):	Archivos de inclusiÛn y bibliotecas para pvm
-Summary(pl):	Pliki nag≥Ûwkowe i biblioteki statyczne PVM
-Summary(pt_BR):	Arquivos de inclus„o e bibliotecas para o pvm
+Summary(es.UTF-8):   Archivos de inclusi√≥n y bibliotecas para pvm
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i biblioteki statyczne PVM
+Summary(pt_BR.UTF-8):   Arquivos de inclus√£o e bibliotecas para o pvm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains PVM header files and static libraries.
 
-%description devel -l es
-Este paquete contiene los archivos de inclusiÛn y bibliotecas que se
+%description devel -l es.UTF-8
+Este paquete contiene los archivos de inclusi√≥n y bibliotecas que se
 necesitan para desarrollar programas que usan pvm.
 
-%description devel -l pl
-Pakiet zawiera pliki nag≥Ûwkowe i biblioteki (statyczne) PVM.
+%description devel -l pl.UTF-8
+Pakiet zawiera pliki nag≈Ç√≥wkowe i biblioteki (statyczne) PVM.
 
-%description devel -l pt_BR
-Este pacote contÈm os arquivos de inclus„o e bibliotecas que s„o
-necess·rios para desenvolver programas que usam o pvm.
+%description devel -l pt_BR.UTF-8
+Este pacote cont√©m os arquivos de inclus√£o e bibliotecas que s√£o
+necess√°rios para desenvolver programas que usam o pvm.
 
 %package examples
 Summary:	PVM examples
-Summary(pl):	Przyk≥ady uøycia PVM
+Summary(pl.UTF-8):   Przyk≈Çady u≈ºycia PVM
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -109,20 +109,20 @@ Requires:	%{name}-devel = %{version}-%{release}
 This package contains PVM examples written in C and Fortran, and book
 written in English.
 
-%description examples -l pl
-Pakiet zawiera przyk≥ady uøycia PVM napisane w C oraz Fortranie, a
-takøe ksi±økÍ po angielsku.
+%description examples -l pl.UTF-8
+Pakiet zawiera przyk≈Çady u≈ºycia PVM napisane w C oraz Fortranie, a
+tak≈ºe ksiƒÖ≈ºkƒô po angielsku.
 
 %package -n pvmd
 Summary:	PVM Daemon
-Summary(pl):	Demon PVM
+Summary(pl.UTF-8):   Demon PVM
 Group:		Applications/Networking
 #Requires(post,preun):	/sbin/chkconfig
 
 %description -n pvmd
 PVM Daemon.
 
-%description -n pvmd -l pl
+%description -n pvmd -l pl.UTF-8
 Demon PVM.
 
 %prep
