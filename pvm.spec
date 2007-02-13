@@ -1,7 +1,7 @@
 Summary:	Parallel Virtual Machine
-Summary(es.UTF-8):   Máquina virtual paralela
-Summary(pl.UTF-8):   Rozproszona Maszyna Wirtualna
-Summary(pt_BR.UTF-8):   Máquina virtual paralela
+Summary(es.UTF-8):	Máquina virtual paralela
+Summary(pl.UTF-8):	Rozproszona Maszyna Wirtualna
+Summary(pt_BR.UTF-8):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.5
 Release:	1
@@ -79,9 +79,9 @@ multiprocessamento.
 
 %package devel
 Summary:	PVM header files and static libraries
-Summary(es.UTF-8):   Archivos de inclusión y bibliotecas para pvm
-Summary(pl.UTF-8):   Pliki nagłówkowe i biblioteki statyczne PVM
-Summary(pt_BR.UTF-8):   Arquivos de inclusão e bibliotecas para o pvm
+Summary(es.UTF-8):	Archivos de inclusión y bibliotecas para pvm
+Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteki statyczne PVM
+Summary(pt_BR.UTF-8):	Arquivos de inclusão e bibliotecas para o pvm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -101,7 +101,7 @@ necessários para desenvolver programas que usam o pvm.
 
 %package examples
 Summary:	PVM examples
-Summary(pl.UTF-8):   Przykłady użycia PVM
+Summary(pl.UTF-8):	Przykłady użycia PVM
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -115,7 +115,7 @@ także książkę po angielsku.
 
 %package -n pvmd
 Summary:	PVM Daemon
-Summary(pl.UTF-8):   Demon PVM
+Summary(pl.UTF-8):	Demon PVM
 Group:		Applications/Networking
 #Requires(post,preun):	/sbin/chkconfig
 
