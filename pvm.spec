@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Rozproszona Maszyna Wirtualna
 Summary(pt_BR.UTF-8):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.5
-Release:	1
+Release:	1.1
 License:	Free
 Group:		Applications/Networking
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
@@ -231,3 +231,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(754,root,root) /etc/rc.d/init.d/pvmd
 %{_mandir}/man1/pvmd*
 %{_mandir}/man1/pvm_shmd*
+%{_pvm_root}/bin
+%{_pvm_root}/bin/%{_pvm_arch}
