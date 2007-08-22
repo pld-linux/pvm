@@ -142,7 +142,9 @@ PCFLOPTS="$PCFLOPTS -DDEFDEBUGGER=\\\"%{_bindir}/debugger2\\\""
 PCFLOPTS="$PCFLOPTS -DPVMDPATH=\\\"%{_sbindir}/pvmd3\\\""
 PCFLOPTS="$PCFLOPTS -DPVMROOT=\\\"%{_pvm_root}\\\""
 
-PVM_ROOT=`pwd` make CFLOPTS="$PCFLOPTS"
+PVM_ROOT=`pwd` \
+%{__make} \
+	CFLOPTS="$PCFLOPTS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -231,5 +233,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(754,root,root) /etc/rc.d/init.d/pvmd
 %{_mandir}/man1/pvmd*
 %{_mandir}/man1/pvm_shmd*
-%{_pvm_root}/bin
-%{_pvm_root}/bin/%{_pvm_arch}
