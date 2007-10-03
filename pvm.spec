@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Rozproszona Maszyna Wirtualna
 Summary(pt_BR.UTF-8):	Máquina virtual paralela
 Name:		pvm
 Version:	3.4.5
-Release:	1.1
+Release:	2
 License:	Free
 Group:		Applications/Networking
 Source0:	ftp://ftp.netlib.org/pvm3/%{name}%{version}.tgz
